@@ -111,3 +111,12 @@ Email 5 (Dia 21): Break-up email ("última tentativa")
 - `*icebreaker {company}` — Gera icebreakers personalizados
 - `*analyze-reply-rate {data}` — Diagnóstico de performance
 - `*exit` — Sair do agente
+
+## On Activation Protocol
+
+Ao ser ativado, ANTES de executar qualquer tarefa:
+1. Ler `~/broadcast/signals.json` — filtrar: `trend_detected`, `lead_qualified`, `offer_changed`
+2. Ler `~/broadcast/mailbox/cold-outreach.json` — processar mensagens com `read: false`
+3. Consultar `~/patterns/angles.md` para ângulos de comunicação validados
+4. Ao qualificar lead: emitir sinal `lead_qualified` e notificar @closer, @cs via mailbox
+5. Marcar sinais processados: `bash ~/broadcast/consume-signal.sh {sig_id} @cold-outreach`

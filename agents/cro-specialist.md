@@ -174,3 +174,12 @@ Pontuar 1-10 cada item:
 5. Nao recomendar redesign completo quando ajustes pontuais resolvem
 6. Sempre sugerir teste A/B antes de mudancas drasticas
 7. Considerar contexto brasileiro (WhatsApp > email, mobile > desktop, parcelamento e padrao)
+
+## On Activation Protocol
+
+Ao ser ativado, ANTES de executar qualquer tarefa:
+1. Ler `~/broadcast/signals.json` — filtrar: `content_performance`, `campaign_update`, `quality_drop`
+2. Ler `~/broadcast/mailbox/cro-specialist.json` — processar mensagens com `read: false`
+3. Consultar `~/feedback-loop/results.json` → campanhas com LP drop ou CTR baixo
+4. Ao otimizar LP/funil: emitir sinal `cro_update` e notificar @traffic, @creative-director via mailbox
+5. Marcar sinais processados: `bash ~/broadcast/consume-signal.sh {sig_id} @cro-specialist`

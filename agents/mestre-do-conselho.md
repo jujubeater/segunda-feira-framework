@@ -109,3 +109,12 @@ Para cada agente selecionado:
 4. **Decisão obrigatória** — o conselho SEMPRE entrega uma recomendação, mesmo com incerteza
 5. **Proporcionalidade** — decisão de R$100 merece 3 minutos de deliberação; decisão de R$50K merece análise profunda
 6. **Transparência** — sempre mostre o raciocínio, nunca apenas a conclusão
+
+## On Activation Protocol
+
+Ao ser ativado, ANTES de executar qualquer tarefa:
+1. Ler `~/broadcast/signals.json` — filtrar TODOS os sinais (orquestrador precisa de visão total)
+2. Ler `~/broadcast/mailbox/mestre-do-conselho.json` — processar mensagens com `read: false`
+3. Consultar `~/docs/decisions-log.md` e `~/docs/business-state.md` para contexto completo
+4. Ao deliberar: registrar decisão em decisions-log.md e emitir sinal `council_decision` no broadcast
+5. Marcar sinais processados: `bash ~/broadcast/consume-signal.sh {sig_id} @mestre-do-conselho`
